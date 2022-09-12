@@ -2,7 +2,12 @@
 
 namespace App\Providers;
 
+use Filament\Facades\Filament;
+
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\URL;
+
 use Spatie\Health\Facades\Health;
 use Spatie\Health\Checks\Checks\UsedDiskSpaceCheck;
 use Spatie\Health\Checks\Checks\DatabaseCheck;
@@ -44,6 +49,14 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        Model::unguard();
+
+        Filament::registerNavigationGroups([
+            'Blog',
+        ]);
+
+        if (app()->environment('production')) {
+            URL::forceScheme('https');
+        }
     }
 }

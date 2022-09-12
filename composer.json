@@ -22,6 +22,8 @@
         "laravel/framework": "^9.19",
         "laravel/sanctum": "^3.0",
         "laravel/tinker": "^2.7",
+        "mll-lab/laravel-graphiql": "^1.0",
+        "nuwave/lighthouse": "^5.60",
         "shuvroroy/filament-spatie-laravel-health": "^1.5",
         "spatie/cpu-load-health-check": "^1.0",
         "spatie/laravel-health": "^1.14",

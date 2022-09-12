@@ -1,0 +1,24 @@
+type Category {
+    id: ID!
+    name: String!
+    slug: String!
+    description: String
+    is_visible: Boolean!
+    seo_title: String
+    seo_description: String
+
+    posts: [Post!]! @hasMany(type: CONNECTION)
+}
+
+extend type Query {
+    categories: [Category!]! @all
+    category(
+        "Search by primary key."
+        id: ID @eq @rules(apply: ["prohibits:slug", "required_without:slug"])
+
+        "Search by slug."
+        slug: String
+            @eq
+            @rules(apply: ["prohibits:id", "required_without:id", "slug"])
+    ): Category @find
+}

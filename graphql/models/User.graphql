@@ -1,0 +1,33 @@
+# "Indicates what fields are available at the top level of a query operation."
+# type Query {
+#     me: User @auth @guard
+
+#     "Find a single user by an identifying attribute."
+#     user(
+#         "Search by primary key."
+#         id: ID @eq @rules(apply: ["prohibits:email", "required_without:email"])
+
+#         "Search by email address."
+#         email: String
+#             @eq
+#             @rules(apply: ["prohibits:id", "required_without:id", "email"])
+#     ): User @find
+
+#     "List multiple users."
+#     users(
+#         "Filters by name. Accepts SQL LIKE wildcards `%` and `_`."
+#         name: String @where(operator: "like")
+#     ): [User!]! @paginate(defaultCount: 10)
+# }
+
+"Account of a person who utilizes this application."
+type User {
+    "Unique primary key."
+    id: ID!
+    "Non-unique name."
+    name: String!
+    "Unique email address."
+    email: String!
+    "When all posts for user"
+    posts: [Post!]! @hasMany(type: CONNECTION)
+}
